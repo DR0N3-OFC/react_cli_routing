@@ -3,7 +3,6 @@ import { Button } from '../Button';
 import { useNavigate } from 'react-router-dom';
 import {
     BuscarInputContainer,
-    Column,
     Container,
     Input,
     Menu,
