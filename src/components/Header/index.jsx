@@ -1,5 +1,6 @@
 import logo from '../../assets/logo-dio.svg';
 import { Button } from '../Button';
+import { useNavigate } from 'react-router-dom';
 import {
     BuscarInputContainer,
     Column,
@@ -12,22 +13,39 @@ import {
     Wrapper
 } from './styles';
 
-const Header = () => {
+const Header = ({autenticado}) => {
+    
+    const navigate = useNavigate();
+    const handleClickSignIn = () => {
+        navigate('/login');
+    }
+    const handleClickHome = () => {
+        navigate('/');
+    }
+
   return (
     <Wrapper>
         <Container>
             <Row>
-                <img src={logo} alt="Logo da dio"/>
-                <BuscarInputContainer>
-                    <Input placeholder='Buscar...' />
-                </BuscarInputContainer>
-                <Menu>Live Code</Menu>
-                <Menu>Global</Menu>
+                <img src={logo} alt="Logo da dio" onClick={handleClickHome}/>
+                {autenticado ? (<>
+                    <BuscarInputContainer>
+                        <Input placeholder='Buscar...' />
+                    </BuscarInputContainer>
+                    <Menu>Live Code</Menu>
+                    <Menu>Global</Menu>
+                </>) : null}
             </Row>
             <Row>
-                <MenuRight href='#'>Nome</MenuRight>
-                <Button title="Entrar" />
-                <Button title="Cadastrar" />
+                {autenticado ? (
+                    <UserPicture src='https://avatars.githubusercontent.com/u/86325711?v=4' />
+                ) : (
+                    <>
+                        <MenuRight href='#'>Nome</MenuRight>
+                        <Button title="Entrar" onClick={handleClickSignIn} />
+                        <Button title="Cadastrar" />
+                    </>
+                )}
             </Row>
         </Container>
     </Wrapper>
