@@ -43,7 +43,7 @@ const Header = ({autenticado}) => {
                     <UserPicture src='https://avatars.githubusercontent.com/u/86325711?v=4' />
                 ) : (
                     <>
-                        <MenuRight href='#'>Nome</MenuRight>
+                        <MenuRight href='#'>Bruno</MenuRight>
                         <Button title="Entrar" onClick={handleClickSignIn} />
                         <Button title="Cadastrar" onClick={handleClickSignUp} />
                     </>
