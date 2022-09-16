@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Container, Column, DeclaroText, LoginText, Row, SubtitleSignUp, Title, TitleSignUp, Wrapper, FazerLoginText } from "./styles";
+import { IFormData } from "./types";
 
 const schema = yup.object({
     name: yup.string().min(5, 'Insira um nome válido').matches(/[A-Z]+[a-z]/, 'Please enter valid name').required(),
@@ -16,12 +17,12 @@ const schema = yup.object({
 
 const SignUp = () => {
 
-    const { control, handleSubmit, formState: { errors, isValid } } = useForm({
+    const { control, handleSubmit, formState: { errors, isValid } } = useForm<IFormData>({
         resolver: yupResolver(schema),
         mode: 'onChange',
     });
     
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data:IFormData) => console.log(data);
 
     const navigate = useNavigate();
 
