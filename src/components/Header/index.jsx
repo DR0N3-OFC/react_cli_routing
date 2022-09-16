@@ -18,6 +18,9 @@ const Header = ({autenticado}) => {
     const handleClickSignIn = () => {
         navigate('/login');
     }
+    const handleClickSignUp = () => {
+        navigate('/signup');
+    }
     const handleClickHome = () => {
         navigate('/');
     }
@@ -42,7 +45,7 @@ const Header = ({autenticado}) => {
                     <>
                         <MenuRight href='#'>Nome</MenuRight>
                         <Button title="Entrar" onClick={handleClickSignIn} />
-                        <Button title="Cadastrar" />
+                        <Button title="Cadastrar" onClick={handleClickSignUp} />
                     </>
                 )}
             </Row>
