@@ -1,6 +1,8 @@
 import logo from '../../assets/logo-dio.svg';
 import { Button } from '../Button';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/auth';
 import {
     BuscarInputContainer,
     Container,
@@ -11,10 +13,11 @@ import {
     UserPicture,
     Wrapper
 } from './styles';
-import { IHeader } from './types';
 
-const Header = ({autenticado}: IHeader) => {
+const Header = () => {
     
+    const { user, handleSignOut } = useContext(AuthContext);
+
     const navigate = useNavigate();
     const handleClickSignIn = () => {
         navigate('/login');
@@ -31,7 +34,7 @@ const Header = ({autenticado}: IHeader) => {
         <Container>
             <Row>
                 <img src={logo} alt="Logo da dio" onClick={handleClickHome}/>
-                {autenticado ? (<>
+                {user.id ? (<>
                     <BuscarInputContainer>
                         <Input placeholder='Buscar...' />
                     </BuscarInputContainer>
@@ -40,11 +43,14 @@ const Header = ({autenticado}: IHeader) => {
                 </>) : null}
             </Row>
             <Row>
-                {autenticado ? (
-                    <UserPicture src='https://avatars.githubusercontent.com/u/86325711?v=4' />
-                ) : (
+                {user.id ? (
                     <>
-                        <MenuRight href='#'>Bruno</MenuRight>
+                        <UserPicture src='https://avatars.githubusercontent.com/u/86325711?v=4' />
+                        <a href="#" onClick={handleSignOut}>Sair</a>
+                    </>
+                    ) : (
+                    <>
+                        <MenuRight href='#'>Home</MenuRight>
                         <Button title="Entrar" onClick={handleClickSignIn} />
                         <Button title="Cadastrar" onClick={handleClickSignUp} />
                     </>

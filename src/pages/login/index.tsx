@@ -2,13 +2,13 @@ import { MdLock, MdEmail } from "react-icons/md";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useContext } from "react";
 import { Container, Column, CriarText, EsqueciText, Row, SubtitleLogin, Title, TitleLogin, Wrapper } from "./styles";
-import { api } from "../../services/api";
 import { IFormData } from "./types";
+import { AuthContext } from "../../context/auth";
 
 const schema = yup.object({
     email: yup.string().email("E-mail inválido").required('Campo obrigatório'),
@@ -17,7 +17,7 @@ const schema = yup.object({
 
 const Login = () => {
     
-    const navigate = useNavigate();
+    const { handleLogin } = useContext(AuthContext);
 
     const { control, handleSubmit, formState: { errors } } = useForm<IFormData>({
         resolver: yupResolver(schema),
@@ -25,16 +25,7 @@ const Login = () => {
     });
 
     const onSubmit = async (formData: IFormData) => {
-        try{
-            const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`)
-            if(data.length === 1) {
-                navigate('/feed');
-            } else {
-                alert('E-mail ou senha inválidos.')
-            }
-        } catch {
-            alert("Ocorreu um erro, tente novamente.");
-        }
+        handleLogin(formData);
     };
 
     return(<>

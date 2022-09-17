@@ -73,6 +73,7 @@ export const UserPicture = styled.img`
     height: 32px;
     border-radius: 22px;
     border: 2px solid #ffffff;
+    margin-right: 15px;
 `;
 
 export const Input = styled.input`
