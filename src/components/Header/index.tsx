@@ -1,8 +1,7 @@
 import logo from '../../assets/logo-dio.svg';
 import { Button } from '../Button';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/auth';
+import { useAuth } from '../../hooks/useAuth';
 import {
     BuscarInputContainer,
     Container,
@@ -16,7 +15,7 @@ import {
 
 const Header = () => {
     
-    const { user, handleSignOut } = useContext(AuthContext);
+    const { user, handleSignOut } = useAuth();
 
     const navigate = useNavigate();
     const handleClickSignIn = () => {
@@ -46,7 +45,7 @@ const Header = () => {
                 {user.id ? (
                     <>
                         <UserPicture src='https://avatars.githubusercontent.com/u/86325711?v=4' />
-                        <a href="#" onClick={handleSignOut}>Sair</a>
+                        <a href="/" onClick={handleSignOut}>Sair</a>
                     </>
                     ) : (
                     <>

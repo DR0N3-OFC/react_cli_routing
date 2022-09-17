@@ -5,10 +5,9 @@ import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useContext } from "react";
 import { Container, Column, CriarText, EsqueciText, Row, SubtitleLogin, Title, TitleLogin, Wrapper } from "./styles";
 import { IFormData } from "./types";
-import { AuthContext } from "../../context/auth";
+import { useAuth } from "../../hooks/useAuth";
 
 const schema = yup.object({
     email: yup.string().email("E-mail inválido").required('Campo obrigatório'),
@@ -17,7 +16,7 @@ const schema = yup.object({
 
 const Login = () => {
     
-    const { handleLogin } = useContext(AuthContext);
+    const { handleLogin } = useAuth();
 
     const { control, handleSubmit, formState: { errors } } = useForm<IFormData>({
         resolver: yupResolver(schema),
